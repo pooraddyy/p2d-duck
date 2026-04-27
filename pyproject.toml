@@ -1,0 +1,74 @@
+[build-system]
+requires = ["hatchling>=1.18"]
+build-backend = "hatchling.build"
+
+[project]
+name = "p2d-duck"
+version = "0.4.0"
+description = "Free Python client for DuckDuckGo AI Chat (duck.ai). Sync + async + streaming + image generation + image upload (multimodal). No API key required."
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.10"
+authors = [
+    { name = "p2d-duck contributors" },
+]
+keywords = [
+    "duckduckgo", "duck.ai", "duckchat", "chatgpt", "claude", "llama",
+    "mistral", "llm", "ai", "chatbot", "image-generation", "multimodal",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Typing :: Typed",
+]
+dependencies = [
+    "requests>=2.28",
+    "mini-racer>=0.12",
+    "cryptography>=41",
+    "html5lib>=1.1",
+]
+
+[project.optional-dependencies]
+async = ["aiohttp>=3.9"]
+dev = [
+    "aiohttp>=3.9",
+    "pytest>=7",
+    "pytest-asyncio>=0.21",
+    "build",
+    "twine",
+]
+
+[project.urls]
+Homepage = "https://github.com/pooraddyy/duck-ai-client"
+Repository = "https://github.com/pooraddyy/duck-ai-client"
+Issues = "https://github.com/pooraddyy/duck-ai-client/issues"
+
+[project.scripts]
+p2d-duck = "p2d_duck.__main__:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["p2d_duck"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"p2d_duck/_stubs.js" = "p2d_duck/_stubs.js"
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "p2d_duck",
+    "README.md",
+    "LICENSE",
+    "examples",
+    "tests",
+    "pyproject.toml",
+]
