@@ -218,36 +218,6 @@ No external Node.js install is required.
 If you hit `HTTP 418 ERR_CHALLENGE` repeatedly, your IP is being throttled by
 duck.ai's anti-abuse system. Wait 30-60 seconds between consecutive requests.
 
-## Publishing (maintainers)
-
-Releases are published to PyPI automatically by the GitHub Actions workflow at
-`.github/workflows/publish.yml` using
-[trusted publishing](https://docs.pypi.org/trusted-publishers/) (OIDC, no API
-tokens stored in the repo).
-
-To configure trusted publishing once:
-
-1. Create the `p2d-duck` project on PyPI (an initial manual upload may be
-   required if the project does not exist yet).
-2. On PyPI, open the project, go to **Manage project -> Publishing** and add a
-   new GitHub publisher with:
-   - Owner: `pooraddyy`
-   - Repository: `duck-ai-client`
-   - Workflow filename: `publish.yml`
-   - Environment name: `pypi`
-3. In the GitHub repo, create an environment called `pypi` (Settings ->
-   Environments). No secrets are needed.
-
-To release:
-
-```bash
-git tag v0.4.0
-git push --tags
-```
-
-The workflow also runs on GitHub Releases and can be triggered manually from
-the Actions tab.
-
 ## License
 
 MIT. See [LICENSE](LICENSE).
