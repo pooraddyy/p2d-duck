@@ -6,11 +6,9 @@ from typing import Any, Dict, Optional
 
 from .exceptions import DuckChatError
 
-
 def _b64u_int(i: int) -> str:
     length = (i.bit_length() + 7) // 8 or 1
     return base64.urlsafe_b64encode(i.to_bytes(length, "big")).rstrip(b"=").decode()
-
 
 def generate_jwk() -> Dict[str, Any]:
     try:
@@ -31,7 +29,6 @@ def generate_jwk() -> Dict[str, Any]:
         "n": _b64u_int(nums.n),
         "use": "enc",
     }
-
 
 def make_durable_stream(jwk: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
     return {

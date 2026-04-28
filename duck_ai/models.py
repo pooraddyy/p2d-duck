@@ -6,9 +6,7 @@ from dataclasses import dataclass, field
 from enum import Enum
 from typing import Dict, List, Optional, Union
 
-
 class ModelType(str, Enum):
-
     GPT4oMini = "gpt-4o-mini"
     GPT5Mini = "gpt-5-mini"
     Claude = "claude-haiku-4-5"
@@ -22,7 +20,6 @@ class ModelType(str, Enum):
 
     def __str__(self) -> str:
         return self.value
-
 
 # Convenience constants users can import directly.
 gpt4 = "gpt-4o-mini"
@@ -38,7 +35,6 @@ mistral_small = "mistral-small-2603"
 gpt_oss = "tinfoil/gpt-oss-120b"
 gpt_oss_120b = "tinfoil/gpt-oss-120b"
 image_generation = "image-generation"
-
 
 # A liberal alias map — any unknown string falls through unchanged so users
 # can pass new model ids without waiting for a library update.
@@ -87,7 +83,6 @@ MODEL_ALIASES: Dict[str, str] = {
     "img": image_generation,
 }
 
-
 # Per-model capability table. `default`, `fast`, and `thinking` are the
 # duck.ai effort tokens to send for the corresponding caller intent.
 _MODEL_CAPABILITIES: Dict[str, Dict[str, object]] = {
@@ -121,7 +116,6 @@ _MODEL_CAPABILITIES: Dict[str, Dict[str, object]] = {
     "image-generation": {"reasoning": False, "vision": False},
 }
 
-
 def resolve_model(name: Union["ModelType", str, None]) -> str:
     if name is None:
         return gpt4
@@ -132,26 +126,21 @@ def resolve_model(name: Union["ModelType", str, None]) -> str:
     key = name.strip()
     return MODEL_ALIASES.get(key.lower(), key)
 
-
 def list_models() -> List[str]:
     return list(_MODEL_CAPABILITIES.keys())
-
 
 def model_supports_reasoning(model: Union["ModelType", str]) -> bool:
     return bool(
         _MODEL_CAPABILITIES.get(resolve_model(model), {}).get("reasoning", False)
     )
 
-
 def model_supports_vision(model: Union["ModelType", str]) -> bool:
     return bool(
         _MODEL_CAPABILITIES.get(resolve_model(model), {}).get("vision", False)
     )
 
-
 def vision_capable_default() -> str:
     return "gpt-5-mini"
-
 
 def resolve_effort(
     model: Union["ModelType", str], effort: Optional[str]
@@ -169,7 +158,6 @@ def resolve_effort(
     # Pass-through for raw effort tokens like "minimal"/"low"/"medium"/"high".
     return effort
 
-
 class Role(str, Enum):
     User = "user"
     Assistant = "assistant"
@@ -178,10 +166,8 @@ class Role(str, Enum):
     def __str__(self) -> str:
         return self.value
 
-
 @dataclass
 class ImagePart:
-
     image: str
     mime_type: str = "image/png"
 
@@ -199,9 +185,7 @@ class ImagePart:
     def to_part(self) -> dict:
         return {"type": "image", "mimeType": self.mime_type, "image": self.image}
 
-
 Content = Union[str, List[Union[str, ImagePart, dict]]]
-
 
 @dataclass
 class Message:
@@ -224,7 +208,6 @@ class Message:
                     f"Unsupported content part: {type(p).__name__}"
                 )
         return {"role": str(self.role), "content": parts}
-
 
 @dataclass
 class History:

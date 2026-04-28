@@ -2,25 +2,19 @@ from __future__ import annotations
 
 from typing import Optional
 
-
 class DuckChatError(Exception):
     pass
-
 
 class ChallengeError(DuckChatError):
     pass
 
-
 class RateLimitError(DuckChatError):
     pass
-
 
 class ConversationLimitError(DuckChatError):
     pass
 
-
 class APIError(DuckChatError):
-
     def __init__(
         self,
         message: str,

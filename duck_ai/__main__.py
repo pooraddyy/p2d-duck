@@ -5,7 +5,6 @@ import sys
 
 from . import DuckChat, __version__, gpt4, image_generation, list_models
 
-
 def _build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(
         prog="duck-ai",
@@ -57,7 +56,6 @@ def _build_parser() -> argparse.ArgumentParser:
 
     return p
 
-
 def _img(spec: str):
     from .models import ImagePart
 
@@ -72,12 +70,10 @@ def _img(spec: str):
             return ImagePart.from_bytes(data, mime_type=mt)
     return ImagePart.from_path(spec)
 
-
 def _make_client(args) -> DuckChat:
     return DuckChat(
         model=args.model, effort=args.effort, max_retries=args.retries
     )
-
 
 def _run_chat(args: argparse.Namespace) -> int:
     duck = _make_client(args)
@@ -131,7 +127,6 @@ def _run_chat(args: argparse.Namespace) -> int:
         duck.close()
     return 0
 
-
 def _run_image(args: argparse.Namespace) -> int:
     prompt = " ".join(args.prompt)
     duck = DuckChat(model=image_generation, max_retries=args.retries)
@@ -142,12 +137,10 @@ def _run_image(args: argparse.Namespace) -> int:
         duck.close()
     return 0
 
-
 def _run_models(_args: argparse.Namespace) -> int:
     for m in list_models():
         print(m)
     return 0
-
 
 def main(argv=None) -> int:
     parser = _build_parser()
@@ -157,7 +150,6 @@ def main(argv=None) -> int:
     if args.cmd == "models":
         return _run_models(args)
     return _run_chat(args)
-
 
 if __name__ == "__main__":
     sys.exit(main())

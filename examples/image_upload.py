@@ -1,6 +1,5 @@
 from duck_ai import DuckChat, ImagePart
 
-
 def main() -> None:
     with DuckChat() as duck:
         # Single image
@@ -16,7 +15,6 @@ def main() -> None:
             ImagePart.from_path("a.png"),
             ImagePart.from_path("b.png"),
         ]))
-
 
 if __name__ == "__main__":
     main()

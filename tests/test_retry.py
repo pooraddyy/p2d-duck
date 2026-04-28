@@ -6,7 +6,6 @@ import pytest
 
 from duck_ai import APIError, ChallengeError, ConversationLimitError, DuckChat
 
-
 def _stub_init(self):
     self.model = "gpt-4o-mini"
     self.effort = None
@@ -26,12 +25,10 @@ def _stub_init(self):
     self._client = None
     self._warmed = True
 
-
 def _make_chat() -> DuckChat:
     chat = DuckChat.__new__(DuckChat)
     _stub_init(chat)
     return chat
-
 
 def test_retry_succeeds_after_transient_challenge_error():
     chat = _make_chat()
@@ -49,7 +46,6 @@ def test_retry_succeeds_after_transient_challenge_error():
     assert calls["n"] == 2
     assert out == [{"message": "hello"}]
 
-
 def test_retry_gives_up_after_max_attempts():
     chat = _make_chat()
     chat.max_retries = 2
@@ -65,7 +61,6 @@ def test_retry_gives_up_after_max_attempts():
             list(chat._stream_with_retry({}))
 
     assert attempts["n"] == 2
-
 
 def test_conversation_limit_is_terminal():
     chat = _make_chat()
@@ -83,7 +78,6 @@ def test_conversation_limit_is_terminal():
     # No retries — terminal error should bail out immediately.
     assert attempts["n"] == 1
 
-
 def test_4xx_api_error_is_not_retried():
     chat = _make_chat()
     attempts = {"n": 0}
@@ -98,7 +92,6 @@ def test_4xx_api_error_is_not_retried():
             list(chat._stream_with_retry({}))
 
     assert attempts["n"] == 1
-
 
 def test_5xx_api_error_is_retried():
     chat = _make_chat()

@@ -16,7 +16,6 @@ _STUBS_TEMPLATE: Optional[str] = None
 _STUBS_LOCK = threading.Lock()
 _RUNTIME_LOCK = threading.Lock()
 
-
 def _load_stubs() -> str:
     global _STUBS_TEMPLATE
     if _STUBS_TEMPLATE is None:
@@ -26,12 +25,10 @@ def _load_stubs() -> str:
                     _STUBS_TEMPLATE = f.read()
     return _STUBS_TEMPLATE
 
-
 def _b64_sha256(s: str) -> str:
     return base64.b64encode(hashlib.sha256(s.encode("utf-8")).digest()).decode(
         "ascii"
     )
-
 
 def _has_minirar() -> bool:
     try:
@@ -40,7 +37,6 @@ def _has_minirar() -> bool:
         return True
     except Exception:
         return False
-
 
 def _extract_html_inputs(js: str) -> List[str]:
     found: List[str] = []
@@ -52,7 +48,6 @@ def _extract_html_inputs(js: str) -> List[str]:
         seen.add(s)
         found.append(s)
     return found
-
 
 def _serialize_etree(node) -> str:
     out = ""
@@ -72,7 +67,6 @@ def _serialize_etree(node) -> str:
             out += child.tail
     return out
 
-
 def _normalize_html(s: str) -> Tuple[str, int]:
     try:
         import html5lib  # type: ignore
@@ -88,14 +82,12 @@ def _normalize_html(s: str) -> Tuple[str, int]:
     except Exception:
         return s, 0
 
-
 def _build_html_lookup(js: str) -> Dict[str, Dict[str, object]]:
     lookup: Dict[str, Dict[str, object]] = {}
     for s in _extract_html_inputs(js):
         norm, count = _normalize_html(s)
         lookup[s] = {"html": norm, "count": count}
     return lookup
-
 
 def solve_challenge(challenge_b64: str, user_agent: str) -> str:
     if not _has_minirar():
@@ -149,7 +141,6 @@ def solve_challenge(challenge_b64: str, user_agent: str) -> str:
     res["client_hashes"] = [_b64_sha256(t) for t in client_hashes]
     payload = json.dumps(res, separators=(",", ":")).encode("utf-8")
     return base64.b64encode(payload).decode("ascii")
-
 
 def make_fe_signals(*, duration_ms: int = 3000) -> str:
     payload = {

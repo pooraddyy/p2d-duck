@@ -49,9 +49,7 @@ _TOOL_CHOICE_OFF = {
     "WeatherForecast": False,
 }
 
-
 class DuckChat:
-
     def __init__(
         self,
         model: Union[ModelType, str] = "gpt4",
