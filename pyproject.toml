@@ -3,8 +3,8 @@ requires = ["hatchling>=1.18"]
 build-backend = "hatchling.build"
 
 [project]
-name = "duck-ai"
-version = "1.0.2"
+name = "p2d-duck"
+version = "1.0.3"
 description = "Free Python client for DuckDuckGo AI Chat (duck.ai). Sync, streaming, image generation, multimodal. Auto-retry on challenge failures. No API key required."
 readme = "README.md"
 license = { text = "MIT" }
@@ -52,6 +52,7 @@ Repository = "https://github.com/pooraddyy/duck-ai-client"
 Issues = "https://github.com/pooraddyy/duck-ai-client/issues"
 
 [project.scripts]
+p2d-duck = "duck_ai.__main__:main"
 duck-ai = "duck_ai.__main__:main"
 
 [tool.hatch.build.targets.wheel]

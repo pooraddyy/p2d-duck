@@ -16,8 +16,10 @@ Free, no-API-key Python client for **DuckDuckGo AI Chat** ([duck.ai](https://duc
 ## Install
 
 ```bash
-pip install duck-ai
+pip install p2d-duck
 ```
+
+Latest release: [**v1.0.3**](https://github.com/pooraddyy/duck-ai-client/releases/tag/v1.0.3) — see the full changelog on the release page.
 
 ## Quickstart
 
@@ -116,14 +118,17 @@ automatically routed to a vision-capable model (`gpt-5-mini`).
 ## CLI
 
 ```bash
-duck-ai                                       # interactive REPL
-duck-ai chat "Hello, who are you?"
-duck-ai -m claude chat "Hi Claude!"
-duck-ai -m gpt5_mini -e reasoning chat "Solve x^2 - 5x + 6 = 0"
-duck-ai chat "Describe this" --image cat.jpg
-duck-ai image "a watercolor moon over a lake" -o moon.jpg
-duck-ai models                                # list known models
+p2d-duck                                       # interactive REPL
+p2d-duck chat "Hello, who are you?"
+p2d-duck -m claude chat "Hi Claude!"
+p2d-duck -m gpt5_mini -e reasoning chat "Solve x^2 - 5x + 6 = 0"
+p2d-duck chat "Describe this" --image cat.jpg
+p2d-duck image "a watercolor moon over a lake" -o moon.jpg
+p2d-duck models                                # list known models
 ```
+
+> The legacy `duck-ai` command is also installed for backwards compatibility,
+> so existing scripts keep working.
 
 ## Reliability — what changed
 
